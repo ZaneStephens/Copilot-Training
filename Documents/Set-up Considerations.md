@@ -89,7 +89,7 @@ A strategic approach to license allocation is advisable:
 | **Licensing Programs** | EA, MCA, CSP |
 | **Typical Cost** | $30 per user per month (varies by region/agreement) |
 
-## 3. Preparing Your Enterprise Environment for Deployment
+## Preparing Your Enterprise Environment for Deployment
 
 A successful Microsoft Copilot deployment requires thorough preparation of your enterprise environment to ensure all necessary components are in place and functioning correctly.
 
@@ -98,7 +98,7 @@ A successful Microsoft Copilot deployment requires thorough preparation of your 
 Begin with a comprehensive technical readiness assessment:
 - Verify that all required Microsoft 365 Apps are installed and up-to-date
 - Evaluate your IT infrastructure to confirm it can support Copilot's demands
-- Complete the Microsoft 365 Copilot Optimization Assessment to gauge data governance maturity and security controls
+- [Complete the Microsoft 365 Copilot Optimization Assessment](https://www.microsoft.com/en-us/solutionassessments/safeedbackform?msockid=1ab7fba1b62062691d75ef43b7b16309) to gauge data governance maturity and security controls
 - Address any weaknesses identified before rollout
 
 ### Privacy Settings Configuration
