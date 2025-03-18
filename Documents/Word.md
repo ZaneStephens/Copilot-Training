@@ -1,5 +1,48 @@
 # Mastering Copilot in Microsoft Word: An End-User Guide
 
+## Table of Contents
+
+- [Introduction to Copilot in Microsoft Word](#introduction-to-copilot-in-microsoft-word)
+- [Getting Started with Copilot](#getting-started-with-copilot)
+  - [Accessing Copilot Features](#accessing-copilot-features)
+  - [Troubleshooting Copilot Access](#troubleshooting-copilot-access)
+- [Using Copilot to Draft Content](#using-copilot-to-draft-content)
+  - [Starting a New Draft](#starting-a-new-draft)
+  - [Drafting Based on Existing Files](#drafting-based-on-existing-files)
+  - [Refining Generated Content](#refining-generated-content)
+- [Enhancing Existing Content with Copilot](#enhancing-existing-content-with-copilot)
+  - [Rewriting Text](#rewriting-text)
+  - [Adding Content to Existing Documents](#adding-content-to-existing-documents)
+  - [Converting Text to Tables](#converting-text-to-tables)
+- [Leveraging Copilot Chat](#leveraging-copilot-chat)
+  - [Accessing and Understanding Copilot Chat](#accessing-and-understanding-copilot-chat)
+  - [Generating New Content through Chat](#generating-new-content-through-chat)
+  - [Interactive Refinement Process](#interactive-refinement-process)
+- [Tips for Effective Prompting](#tips-for-effective-prompting)
+  - [Crafting Clear and Specific Prompts](#crafting-clear-and-specific-prompts)
+  - [Providing Context for Better Results](#providing-context-for-better-results)
+  - [Structuring Prompts Effectively](#structuring-prompts-effectively)
+  - [Sample Prompts for Inspiration](#sample-prompts-for-inspiration)
+- [Best Practices for Using Copilot in Word](#best-practices-for-using-copilot-in-word)
+  - [Treating AI-Generated Content as a First Draft](#treating-ai-generated-content-as-a-first-draft)
+  - [Providing Feedback to Improve Copilot](#providing-feedback-to-improve-copilot)
+  - [Managing Document Length and Complexity](#managing-document-length-and-complexity)
+- [Understanding Copilot's Limitations and Responsible Use](#understanding-copilots-limitations-and-responsible-use)
+  - [Content Accuracy and Reliability](#content-accuracy-and-reliability)
+  - [Content Originality Considerations](#content-originality-considerations)
+  - [Language Support Variations](#language-support-variations)
+- [Privacy Considerations for End Users](#privacy-considerations-for-end-users)
+- [Training Exercises](#training-exercises)
+  - [Exercise 1: Draft a Business Letter](#exercise-1-draft-a-business-letter)
+  - [Exercise 2: Summarize a Report](#exercise-2-summarize-a-report)
+  - [Exercise 3: Transform Text to a Different Tone](#exercise-3-transform-text-to-a-different-tone)
+  - [Exercise 4: Create a Table from Text](#exercise-4-create-a-table-from-text)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Resources for Further Learning](#resources-for-further-learning)
+  - [Official Documentation](#official-documentation)
+  - [Feature Guides](#feature-guides)
+  - [Video Tutorials and Learning Resources](#video-tutorials-and-learning-resources)
+
 ## Introduction to Copilot in Microsoft Word
 
 Copilot in Microsoft Word represents a significant evolution in writing technology, harnessing the power of artificial intelligence to assist you in a multitude of writing tasks. This innovative tool is designed to help you move from the initial concept to a fully realized draft in considerably less time than traditional methods.

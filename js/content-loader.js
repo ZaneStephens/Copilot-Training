@@ -10,6 +10,7 @@ const contentMap = {
     'setup': 'Documents/Set-up Considerations.md',
     'security': 'Documents/Security.md',
     'studio': 'Documents/Studio.md',
+    'studio-agents': 'Documents/Studio Agents.md', // Added Studio Agents document
     'sales': 'Documents/Sales & Service.md',
     
     // Apps

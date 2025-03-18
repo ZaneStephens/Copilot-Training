@@ -1,5 +1,43 @@
 # Microsoft Copilot in PowerPoint: Comprehensive User Guide
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Getting Started with Copilot](#getting-started-with-copilot)
+  - [Accessing Copilot in PowerPoint](#accessing-copilot-in-powerpoint)
+  - [Prerequisites for Using Copilot](#prerequisites-for-using-copilot)
+  - [Setting Up for Optimal Performance](#setting-up-for-optimal-performance)
+- [Creating Presentations with Copilot](#creating-presentations-with-copilot)
+  - [Creating Presentations from Scratch](#creating-presentations-from-scratch)
+  - [Creating Presentations from Existing Files](#creating-presentations-from-existing-files)
+- [Reviewing and Editing Presentations](#reviewing-and-editing-presentations)
+  - [Adding and Removing Slides](#adding-and-removing-slides)
+  - [Modifying Text and Images](#modifying-text-and-images)
+  - [Refining Text with Rewrite Features](#refining-text-with-rewrite-features)
+  - [Organizing and Restructuring](#organizing-and-restructuring)
+- [Summarizing Presentations](#summarizing-presentations)
+  - [Using the Summarization Feature](#using-the-summarization-feature)
+  - [Understanding Reference Numbers](#understanding-reference-numbers)
+  - [Proactive Summary Feature](#proactive-summary-feature)
+- [Integration with Microsoft Designer](#integration-with-microsoft-designer)
+  - [Using Designer with Copilot-Generated Content](#using-designer-with-copilot-generated-content)
+  - [Accessing Design Suggestions](#accessing-design-suggestions)
+  - [Working with Branded Templates](#working-with-branded-templates)
+- [Additional Features and Capabilities](#additional-features-and-capabilities)
+  - [Content Suggestions](#content-suggestions)
+  - [Design Assistance](#design-assistance)
+  - [Visual Enhancement](#visual-enhancement)
+  - [Smart Formatting](#smart-formatting)
+  - [Data Visualization](#data-visualization)
+  - [Presentation Help](#presentation-help)
+- [Best Practices and Tips](#best-practices-and-tips)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
+  - [Copilot Not Loading or Appearing](#copilot-not-loading-or-appearing)
+  - [Errors During Presentation Creation](#errors-during-presentation-creation)
+  - [Understanding Current Limitations](#understanding-current-limitations)
+- [FAQs](#faqs)
+- [Resources](#resources)
+
 ## Introduction
 
 Microsoft Copilot represents a significant advancement in PowerPoint, offering users an AI-powered assistant directly integrated into the application. This guide provides a comprehensive overview of Copilot's features and functionalities, enabling you to effectively leverage this tool to create, enhance, and deliver impactful presentations.

@@ -1,5 +1,38 @@
 # Mastering Microsoft Copilot in Outlook: A Comprehensive User Guide
 
+## Table of Contents
+
+- [Introduction to Copilot in Microsoft Outlook](#introduction-to-copilot-in-microsoft-outlook)
+- [Getting Started with Copilot in Outlook](#getting-started-with-copilot-in-outlook)
+  - [Accessing and Enabling Copilot](#accessing-and-enabling-copilot)
+  - [Understanding the Copilot Interface](#understanding-the-copilot-interface)
+- [Feature Breakdown](#feature-breakdown)
+  - [Start Emails Quickly with "Draft with Copilot"](#start-emails-quickly-with-draft-with-copilot)
+  - [Generate Email Summaries](#generate-email-summaries)
+  - [Planning Events and Meetings](#planning-events-and-meetings)
+- [Additional Productivity Features](#additional-productivity-features)
+  - [Improving Email Quality with "Coaching by Copilot"](#improving-email-quality-with-coaching-by-copilot)
+  - [Using Copilot Chat for Various Tasks](#using-copilot-chat-for-various-tasks)
+  - [Identifying and Managing Action Items](#identifying-and-managing-action-items)
+- [Integration with Other Microsoft 365 Tools](#integration-with-other-microsoft-365-tools)
+  - [Cross-Application Workflows](#cross-application-workflows)
+  - [Example Integrated Workflow](#example-integrated-workflow)
+- [Benefits and Limitations](#benefits-and-limitations)
+  - [Key Benefits](#key-benefits)
+  - [Current Limitations](#current-limitations)
+  - [Effective Workarounds](#effective-workarounds)
+- [Training Exercises](#training-exercises)
+  - [Exercise 1: Draft a Professional Email](#exercise-1-draft-a-professional-email)
+  - [Exercise 2: Summarize a Complex Email Thread](#exercise-2-summarize-a-complex-email-thread)
+  - [Exercise 3: Schedule a Meeting from an Email Thread](#exercise-3-schedule-a-meeting-from-an-email-thread)
+  - [Exercise 4: Use Coaching to Improve Email Quality](#exercise-4-use-coaching-to-improve-email-quality)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Resources](#resources)
+  - [Official Documentation](#official-documentation)
+  - [Prompting Guides](#prompting-guides)
+  - [Video Tutorials](#video-tutorials)
+  - [Feature Compatibility Table](#feature-compatibility-table)
+
 ## Introduction to Copilot in Microsoft Outlook
 
 Microsoft Copilot represents a significant advancement in productivity tools, seamlessly integrating artificial intelligence into the familiar Microsoft 365 environment. Within Microsoft Outlook, Copilot functions as an AI-powered virtual assistant designed to enhance the efficiency and effectiveness of daily email and calendar management tasks. By leveraging sophisticated machine learning algorithms, Copilot assists users in navigating the complexities of email and event management, ultimately streamlining their workflow.
