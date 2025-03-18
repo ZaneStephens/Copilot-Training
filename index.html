@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Copilot Learning Hub</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="js/navigation.js" defer></script>
+    <script src="js/content-loader.js" defer></script>
+    <script src="js/search.js" defer></script>
+    <script src="js/theme-toggle.js" defer></script>
+</head>
+<body class="light-mode">
+    <header>
+        <div class="logo-container">
+            <img src="https://learn.microsoft.com/en-us/media/logos/logo-ms-social.png" alt="Microsoft Logo" class="logo">
+            <h1>Copilot Learning Hub</h1>
+        </div>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Search documentation...">
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <nav>
+            <ul class="main-nav">
+                <li><a href="#home" class="active">Home</a></li>
+                <li class="dropdown">
+                    <a href="#guides">Guides <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#admin">Admin</a>
+                        <a href="#enterprise">Enterprise</a>
+                        <a href="#setup">Setup Considerations</a>
+                        <a href="#security">Security</a>
+                        <a href="#studio">Copilot Studio</a>
+                        <a href="#sales">Sales & Service</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#apps">Apps <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#chat">Chat</a>
+                        <a href="#teams">Teams</a>
+                        <a href="#word">Word</a>
+                        <a href="#excel">Excel</a>
+                        <a href="#powerpoint">PowerPoint</a>
+                        <a href="#outlook">Outlook</a>
+                        <a href="#loop">Loop</a>
+                    </div>
+                </li>
+                <li><a href="#prompt-examples">Prompt Examples</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle" title="Toggle dark/light mode">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button id="menu-toggle" class="mobile-only"><i class="fas fa-bars"></i></button>
+    </header>
+
+    <main id="content-container">
+        <!-- Content will be loaded dynamically here -->
+        <div id="home-content" class="module-content active">
+            <section class="hero">
+                <h2>Microsoft Copilot Documentation</h2>
+                <p>Your comprehensive resource for Microsoft Copilot across the Microsoft 365 ecosystem</p>
+            </section>
+            
+            <section class="featured-guides">
+                <h3>Featured Guides</h3>
+                <div class="card-grid">
+                    <div class="card" data-target="admin">
+                        <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                        <h4>Copilot for Administrators</h4>
+                        <p>Learn how to manage, secure, and optimize Copilot across your organization</p>
+                    </div>
+                    <div class="card" data-target="enterprise">
+                        <div class="card-icon"><i class="fas fa-building"></i></div>
+                        <h4>Enterprise Deployment</h4>
+                        <p>Best practices for deploying Copilot in enterprise environments</p>
+                    </div>
+                    <div class="card" data-target="studio">
+                        <div class="card-icon"><i class="fas fa-code"></i></div>
+                        <h4>Copilot Studio</h4>
+                        <p>Create custom Copilot experiences for your organization</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="app-integrations">
+                <h3>Application Integrations</h3>
+                <div class="card-grid">
+                    <div class="card" data-target="word">
+                        <div class="card-icon"><i class="fas fa-file-word"></i></div>
+                        <h4>Word</h4>
+                        <p>Transform document creation with AI assistance</p>
+                    </div>
+                    <div class="card" data-target="excel">
+                        <div class="card-icon"><i class="fas fa-file-excel"></i></div>
+                        <h4>Excel</h4>
+                        <p>Analyze data and create formulas with natural language</p>
+                    </div>
+                    <div class="card" data-target="powerpoint">
+                        <div class="card-icon"><i class="fas fa-file-powerpoint"></i></div>
+                        <h4>PowerPoint</h4>
+                        <p>Design compelling presentations with AI assistance</p>
+                    </div>
+                    <div class="card" data-target="outlook">
+                        <div class="card-icon"><i class="fas fa-envelope"></i></div>
+                        <h4>Outlook</h4>
+                        <p>Enhance email communication with smart assistance</p>
+                    </div>
+                    <div class="card" data-target="teams">
+                        <div class="card-icon"><i class="fas fa-users"></i></div>
+                        <h4>Teams</h4>
+                        <p>Improve collaboration with meeting assistance and summaries</p>
+                    </div>
+                    <div class="card" data-target="loop">
+                        <div class="card-icon"><i class="fas fa-sync"></i></div>
+                        <h4>Loop</h4>
+                        <p>Transform collaborative workspaces with AI capabilities</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Microsoft Copilot Learning Hub</h4>
+                <p>A comprehensive resource for Microsoft Copilot documentation and training materials</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#guides">Guides</a></li>
+                    <li><a href="#apps">Apps</a></li>
+                    <li><a href="#prompt-examples">Prompt Examples</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="https://learn.microsoft.com/en-us/copilot/" target="_blank">Microsoft Copilot Documentation</a></li>
+                    <li><a href="https://adoption.microsoft.com/en-us/copilot/" target="_blank">Microsoft Copilot Adoption</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Microsoft Copilot Learning Hub. Internal use only.</p>
+        </div>
+    </footer>
+</body>
+</html>

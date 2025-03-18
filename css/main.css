@@ -1,0 +1,118 @@
+/* Main CSS file that imports all modules */
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap');
+@import 'variables.css';
+@import 'reset.css';
+@import 'typography.css';
+@import 'layout.css';
+@import 'header.css';
+@import 'footer.css';
+@import 'buttons.css';
+@import 'cards.css';
+@import 'topics.css';
+@import 'tables.css';
+@import 'utilities.css';
+@import 'responsive.css';
+
+/* Table of Contents styling */
+.table-of-contents {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin: 20px 0 30px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.dark-mode .table-of-contents {
+    background-color: #2d2d2d;
+    border-color: #3d3d3d;
+}
+
+/* Collapsible TOC styles */
+.table-of-contents.collapsible {
+    padding: 0;
+}
+
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e9ecef;
+    cursor: pointer;
+}
+
+.dark-mode .toc-header {
+    border-color: #3d3d3d;
+}
+
+.toc-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.toc-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color, #333);
+    cursor: pointer;
+    padding: 4px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.toc-toggle:hover {
+    color: var(--primary-color, #0078d4);
+}
+
+.toc-content {
+    padding: 16px 24px;
+    max-height: 500px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.toc-content.collapsed {
+    max-height: 0;
+    padding: 0 24px;
+    overflow: hidden;
+}
+
+.toc-content ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.toc-content li {
+    padding: 4px 0; /* Reduced from 3px to 1px */
+    margin: 0px; /* Ensure no margins */
+    line-height: 1.3; /* Tighter line height */
+}
+
+.toc-content li a {
+    display: block;
+    padding: 2px 0;
+}
+
+/* Reduce spacing for nested lists */
+.toc-content ul ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 15px;
+}
+
+.table-of-contents a {
+    color: var(--text-color, #333);
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
+.table-of-contents a:hover {
+    color: var(--primary-color, #0078d4);
+    text-decoration: underline;
+}

@@ -1,0 +1,361 @@
+/* Topics CSS - Styling for markdown content */
+.module-content {
+    padding: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Headings */
+.content-heading {
+    position: relative;
+    padding-bottom: var(--space-sm);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.content-heading:first-child {
+    margin-top: 0;
+}
+
+h1.content-heading {
+    font-size: var(--font-size-huge);
+    color: var(--ms-purple);
+}
+
+h2.content-heading {
+    font-size: var(--font-size-xxl);
+    color: var(--ms-purple-dark);
+}
+
+h3.content-heading {
+    font-size: var(--font-size-xl);
+    color: var(--text-primary);
+}
+
+h4.content-heading {
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+}
+
+/* Anchor links for headings */
+.heading-anchor {
+    position: absolute;
+    left: -1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    font-size: 0.8em;
+    color: var(--ms-purple-light);
+    transition: opacity var(--transition-normal);
+}
+
+.content-heading:hover .heading-anchor {
+    opacity: 1;
+}
+
+/* Table of Contents */
+.table-of-contents {
+    background-color: rgba(92, 45, 145, 0.05);
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    border-left: 4px solid var(--ms-purple-light);
+}
+
+.table-of-contents ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.table-of-contents ul ul {
+    padding-left: var(--space-lg);
+}
+
+.table-of-contents li {
+    margin-bottom: var(--space-sm);
+}
+
+.table-of-contents a {
+    display: inline-block;
+    padding: var(--space-xs) 0;
+    color: var(--ms-purple);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color var(--transition-normal);
+}
+
+.table-of-contents a:hover {
+    color: var(--ms-purple-dark);
+    text-decoration: underline;
+}
+
+h2#table-of-contents {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-md);
+    color: var(--ms-purple);
+    display: flex;
+    align-items: center;
+}
+
+h2#table-of-contents::before {
+    content: '\f03a';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: var(--space-md);
+    color: var(--ms-purple-light);
+}
+
+/* Paragraphs and text */
+.module-content p {
+    margin-bottom: var(--space-md);
+    line-height: 1.7;
+}
+
+.module-content strong {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.module-content em {
+    font-style: italic;
+}
+
+/* Lists - Fixing the numbered list display issue */
+.module-content ul, 
+.module-content ol {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-xl);
+    list-style-position: outside; /* Change from inside to outside */
+}
+
+/* Specific fixes for ordered lists to align numbers with first line */
+.module-content ol {
+    counter-reset: item;
+}
+
+.module-content ol > li {
+    display: list-item; /* Use standard list-item display */
+    position: relative;
+    margin-bottom: var(--space-sm);
+    padding-left: 0.5em;
+    vertical-align: top;
+}
+
+/* Fix alignment for list items with multiple lines */
+.module-content li::marker {
+    vertical-align: top; /* Align the marker with the top of the content */
+}
+
+/* Make sure list item content formats properly */
+.module-content li > strong:first-child,
+.module-content li > b:first-child {
+    vertical-align: top;
+    display: inline;
+}
+
+/* Keep paragraphs flowing properly in list items */
+.module-content li > p {
+    display: inline;
+    margin-top: 0;
+    margin-bottom: 0.3em;
+}
+
+/* Handle spacing between paragraphs in list items */
+.module-content li > p + p {
+    display: block;
+    margin-top: var(--space-sm);
+}
+
+/* Fix for nested lists */
+.module-content li ul,
+.module-content li ol {
+    margin-top: var(--space-sm);
+    margin-bottom: 0;
+}
+
+.module-content a {
+    color: var(--ms-blue);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+}
+
+.module-content a:hover {
+    color: var(--ms-blue-dark);
+    text-decoration: underline;
+}
+
+/* Code blocks */
+.module-content pre {
+    background-color: var(--copilot-bg);
+    border-radius: var(--border-radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+    overflow-x: auto;
+}
+
+.module-content code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--text-light);
+}
+
+.module-content p code {
+    background-color: rgba(92, 45, 145, 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: var(--border-radius-sm);
+    color: var(--ms-purple);
+}
+
+/* Tables */
+.table-wrapper {
+    overflow-x: auto;
+    margin-bottom: var(--space-lg);
+}
+
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.content-table th {
+    background-color: rgba(92, 45, 145, 0.1);
+    color: var(--ms-purple-dark);
+    font-weight: 600;
+    text-align: left;
+    padding: var(--space-sm) var(--space-md);
+}
+
+.content-table td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.content-table tr:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Blockquotes */
+.content-blockquote {
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-lg);
+    background-color: rgba(0, 120, 212, 0.05);
+    border-left: 4px solid var(--ms-blue);
+    border-radius: var(--border-radius-md);
+}
+
+.content-blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* Images */
+.module-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto var(--space-lg);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Horizontal rule */
+.module-content hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: var(--space-xl) 0;
+}
+
+/* Search results styling */
+.search-results-section {
+    margin-bottom: var(--space-xl);
+}
+
+.search-results-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.search-result-card {
+    display: flex;
+    background-color: var(--bg-white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-lg);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+    cursor: pointer;
+}
+
+.search-result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.search-result-icon {
+    margin-right: var(--space-lg);
+    font-size: var(--font-size-xl);
+    color: var(--ms-purple);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+}
+
+.search-result-content {
+    flex-grow: 1;
+}
+
+.search-result-content h4 {
+    margin-bottom: var(--space-sm);
+}
+
+.search-result-context {
+    padding: var(--space-md);
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: var(--border-radius-md);
+    margin-bottom: var(--space-sm);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+.search-result-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+}
+
+.search-highlight {
+    background-color: rgba(255, 185, 0, 0.3);
+    padding: 0.1em 0.2em;
+    border-radius: 2px;
+}
+
+/* Loading state */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-xxl) 0;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(92, 45, 145, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--ms-purple);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error message */
+.error-message {
+    padding: var(--space-xl);
+    text-align: center;
+    color: #d83b01;
+}
