@@ -214,11 +214,11 @@ async function loadPromptExamplesPage(contentElement) {
                         word.charAt(0).toUpperCase() + word.slice(1)
                     ).join(' ');
                     
-                    const icon = getIconForPrompt(id);
+                    const iconDetails = getIconForPrompt(id);
                     
                     return `
                         <div class="card prompt-card" data-prompt="${id}">
-                            <div class="card-icon"><i class="${icon}"></i></div>
+                            <div class="card-icon ${iconDetails.colorClass}"><i class="${iconDetails.icon}"></i></div>
                             <h4>${name} Prompts</h4>
                             <p>Effective prompts for ${name} scenarios</p>
                         </div>
@@ -287,32 +287,32 @@ async function loadGuidesPage(contentElement) {
         <section class="guides-container">
             <div class="card-grid">
                 <div class="card" data-target="admin">
-                    <div class="card-icon"><i class="fas fa-user-shield"></i></div>
+                    <div class="card-icon icon-purple"><i class="fas fa-user-shield"></i></div>
                     <h4>Copilot for Administrators</h4>
                     <p>Learn how to manage, secure, and optimize Copilot across your organization</p>
                 </div>
                 <div class="card" data-target="enterprise">
-                    <div class="card-icon"><i class="fas fa-building"></i></div>
+                    <div class="card-icon icon-blue"><i class="fas fa-building"></i></div>
                     <h4>Enterprise Deployment</h4>
                     <p>Best practices for deploying Copilot in enterprise environments</p>
                 </div>
                 <div class="card" data-target="setup">
-                    <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                    <div class="card-icon icon-green"><i class="fas fa-cogs"></i></div>
                     <h4>Setup Considerations</h4>
                     <p>Important factors to consider when setting up Copilot</p>
                 </div>
                 <div class="card" data-target="security">
-                    <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="card-icon icon-red"><i class="fas fa-shield-alt"></i></div>
                     <h4>Security</h4>
                     <p>Security considerations and best practices for Copilot</p>
                 </div>
                 <div class="card" data-target="studio">
-                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <div class="card-icon icon-teal"><i class="fas fa-code"></i></div>
                     <h4>Copilot Studio</h4>
                     <p>Create custom Copilot experiences for your organization</p>
                 </div>
                 <div class="card" data-target="sales">
-                    <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="card-icon icon-orange"><i class="fas fa-chart-line"></i></div>
                     <h4>Sales & Service</h4>
                     <p>Enhance sales and service workflows with Copilot</p>
                 </div>
@@ -354,37 +354,37 @@ async function loadAppsPage(contentElement) {
         <section class="apps-container">
             <div class="card-grid">
                 <div class="card" data-target="chat">
-                    <div class="card-icon"><i class="fas fa-comments"></i></div>
+                    <div class="card-icon icon-blue"><i class="fas fa-comments"></i></div>
                     <h4>Chat</h4>
                     <p>Access AI assistance through Microsoft Copilot Chat</p>
                 </div>
                 <div class="card" data-target="teams">
-                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <div class="card-icon icon-purple"><i class="fas fa-users"></i></div>
                     <h4>Teams</h4>
                     <p>Improve collaboration with meeting assistance and summaries</p>
                 </div>
                 <div class="card" data-target="word">
-                    <div class="card-icon"><i class="fas fa-file-word"></i></div>
+                    <div class="card-icon icon-blue-dark"><i class="fas fa-file-word"></i></div>
                     <h4>Word</h4>
                     <p>Transform document creation with AI assistance</p>
                 </div>
                 <div class="card" data-target="excel">
-                    <div class="card-icon"><i class="fas fa-file-excel"></i></div>
+                    <div class="card-icon icon-green"><i class="fas fa-file-excel"></i></div>
                     <h4>Excel</h4>
                     <p>Analyze data and create formulas with natural language</p>
                 </div>
                 <div class="card" data-target="powerpoint">
-                    <div class="card-icon"><i class="fas fa-file-powerpoint"></i></div>
+                    <div class="card-icon icon-orange"><i class="fas fa-file-powerpoint"></i></div>
                     <h4>PowerPoint</h4>
                     <p>Design compelling presentations with AI assistance</p>
                 </div>
                 <div class="card" data-target="outlook">
-                    <div class="card-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="card-icon icon-blue-light"><i class="fas fa-envelope"></i></div>
                     <h4>Outlook</h4>
                     <p>Enhance email communication with smart assistance</p>
                 </div>
                 <div class="card" data-target="loop">
-                    <div class="card-icon"><i class="fas fa-sync"></i></div>
+                    <div class="card-icon icon-teal"><i class="fas fa-sync"></i></div>
                     <h4>Loop</h4>
                     <p>Transform collaborative workspaces with AI capabilities</p>
                 </div>
@@ -414,21 +414,21 @@ async function loadAppsPage(contentElement) {
     });
 }
 
-// Helper function to get the appropriate icon for each prompt type
+// Helper function to get the appropriate icon and color class for each prompt type
 function getIconForPrompt(promptId) {
     const iconMap = {
-        'chat-prompts': 'fas fa-comments',
-        'excel-prompts': 'fas fa-file-excel',
-        'loop-prompts': 'fas fa-sync',
-        'outlook-prompts': 'fas fa-envelope',
-        'powerpoint-prompts': 'fas fa-file-powerpoint',
-        'security-prompts': 'fas fa-shield-alt',
-        'security-kql-prompts': 'fas fa-terminal',
-        'teams-prompts': 'fas fa-users',
-        'word-prompts': 'fas fa-file-word'
+        'chat-prompts': { icon: 'fas fa-comments', colorClass: 'icon-blue' },
+        'excel-prompts': { icon: 'fas fa-file-excel', colorClass: 'icon-green' },
+        'loop-prompts': { icon: 'fas fa-sync', colorClass: 'icon-teal' },
+        'outlook-prompts': { icon: 'fas fa-envelope', colorClass: 'icon-blue-light' },
+        'powerpoint-prompts': { icon: 'fas fa-file-powerpoint', colorClass: 'icon-orange' },
+        'security-prompts': { icon: 'fas fa-shield-alt', colorClass: 'icon-red' },
+        'security-kql-prompts': { icon: 'fas fa-terminal', colorClass: 'icon-purple' },
+        'teams-prompts': { icon: 'fas fa-users', colorClass: 'icon-purple' },
+        'word-prompts': { icon: 'fas fa-file-word', colorClass: 'icon-blue-dark' }
     };
     
-    return iconMap[promptId] || 'fas fa-file-alt';
+    return iconMap[promptId] || { icon: 'fas fa-file-alt', colorClass: 'icon-gray' };
 }
 
 // Hide all content sections

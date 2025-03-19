@@ -65,6 +65,57 @@
     background-color: rgba(80, 169, 233, 0.1);
 }
 
+/* Icon color classes for prompt example cards and other sections */
+.icon-blue {
+    color: var(--ms-blue) !important;
+    background-color: rgba(0, 120, 212, 0.1) !important;
+}
+
+.icon-blue-dark {
+    color: var(--ms-blue-dark) !important;
+    background-color: rgba(0, 76, 151, 0.1) !important;
+}
+
+.icon-blue-light {
+    color: var(--ms-blue-light) !important;
+    background-color: rgba(80, 169, 233, 0.1) !important;
+}
+
+.icon-green {
+    color: var(--ms-green) !important;
+    background-color: rgba(16, 124, 16, 0.1) !important;
+}
+
+.icon-purple {
+    color: var(--ms-purple) !important;
+    background-color: rgba(92, 45, 145, 0.1) !important;
+}
+
+.icon-teal {
+    color: var(--ms-teal) !important;
+    background-color: rgba(0, 133, 117, 0.1) !important;
+}
+
+.icon-red {
+    color: var(--ms-red) !important;
+    background-color: rgba(255, 0, 8, 0.226) !important;
+}
+
+.icon-orange {
+    color: var(--ms-orange) !important;
+    background-color: rgba(255, 60, 0, 0.144) !important;
+}
+
+.icon-yellow-dark {
+    color: var(--ms-yellow-dark) !important;
+    background-color: rgba(211, 156, 0, 0.1) !important;
+}
+
+.icon-gray {
+    color: var(--text-secondary) !important;
+    background-color: rgba(96, 94, 92, 0.1) !important;
+}
+
 /* Topic cards for documentation content */
 .topic-card {
     background-color: var(--bg-white);
