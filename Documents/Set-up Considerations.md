@@ -444,9 +444,9 @@ Specific endpoints must be accessible:
 
 - For Copilot Chat in Microsoft Teams: Allowlist specific IP address ranges (consult latest Microsoft documentation)
 - For Copilot Chat in Microsoft Edge: Enable access to:
-  - *.bing.com
-  - *.bing.net
-  - login.live.com
+  - `*.bing.com`
+  - `*.bing.net`
+  - `login.live.com`
 - WebSocket protocol is essential for certain Copilot communication functions
 
 ### Proxy and Firewall Configuration

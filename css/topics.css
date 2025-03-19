@@ -200,11 +200,37 @@ h2#table-of-contents::before {
     color: var(--text-light);
 }
 
-.module-content p code {
-    background-color: rgba(92, 45, 145, 0.1);
+/* Inline code in paragraphs and list items */
+.module-content p code, .module-content li code {
+    background-color: rgba(92, 45, 145, 0.2); /* Increased opacity for better contrast */
     padding: 0.2em 0.4em;
     border-radius: var(--border-radius-sm);
-    color: var(--ms-purple);
+    color: #4b2583; /* Darker purple for better contrast in light mode */
+    border: 1px solid rgba(92, 45, 145, 0.2); /* Adding border for better visibility */
+}
+
+/* Ensure code blocks inside list items render properly */
+.module-content li pre code {
+    background-color: var(--copilot-bg); /* Use the same background as normal code blocks */
+    color: var(--text-light); /* Use light text for code blocks */
+    padding: 0; /* No additional padding needed inside pre */
+    border: none; /* No border for code blocks inside pre */
+}
+
+/* Dark mode specific styling for inline code */
+.dark-mode .module-content p code, 
+.dark-mode .module-content li code {
+    background-color: rgba(92, 45, 145, 0.3);
+    color: #d4adfc; /* Light purple for dark mode */
+    border: 1px solid rgba(92, 45, 145, 0.4);
+}
+
+/* Ensure dark mode code blocks render properly */
+.dark-mode .module-content pre code,
+.dark-mode .module-content li pre code {
+    color: var(--text-light);
+    background-color: transparent;
+    border: none;
 }
 
 /* Tables */
