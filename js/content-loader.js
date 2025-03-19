@@ -38,7 +38,7 @@ const promptExamplesMap = {
     'outlook-prompts': 'Documents/Prompt examples/Outlook.md',
     'powerpoint-prompts': 'Documents/Prompt examples/PowerPoint.md',
     'security-prompts': 'Documents/Prompt examples/Security.md',
-    'security-kql-prompts': 'Documents/Prompt examples/Security KQL.md',
+    'security-KQL-prompts': 'Documents/Prompt examples/Security KQL.md',
     'teams-prompts': 'Documents/Prompt examples/Teams.md',
     'word-prompts': 'Documents/Prompt examples/Word.md'
 };
@@ -423,7 +423,7 @@ function getIconForPrompt(promptId) {
         'outlook-prompts': { icon: 'fas fa-envelope', colorClass: 'icon-blue-light' },
         'powerpoint-prompts': { icon: 'fas fa-file-powerpoint', colorClass: 'icon-orange' },
         'security-prompts': { icon: 'fas fa-shield-alt', colorClass: 'icon-red' },
-        'security-kql-prompts': { icon: 'fas fa-terminal', colorClass: 'icon-purple' },
+        'security-KQL-prompts': { icon: 'fas fa-terminal', colorClass: 'icon-purple' },
         'teams-prompts': { icon: 'fas fa-users', colorClass: 'icon-purple' },
         'word-prompts': { icon: 'fas fa-file-word', colorClass: 'icon-blue-dark' }
     };
@@ -548,13 +548,43 @@ function applyContentEnhancements(contentElement) {
         quote.classList.add('content-blockquote');
     });
     
-    // Make links open in new tab if they're external
+    // Enhanced link handling - Process all content links
     const links = contentElement.querySelectorAll('a');
     links.forEach(link => {
         const href = link.getAttribute('href');
-        if (href && href.startsWith('http')) {
+        if (!href) return;
+        
+        // External links - open in new tab
+        if (href.startsWith('http')) {
             link.setAttribute('target', '_blank');
             link.setAttribute('rel', 'noopener noreferrer');
+        } 
+        // Internal document links without hash/fragment
+        else if (href.startsWith('#') && !href.includes('#', 1)) {
+            const targetId = href.substring(1);
+            
+            // Check if this is a valid document ID in our content map
+            if (contentMap[targetId] || targetId === 'home' || targetId === 'guides' || 
+                targetId === 'apps' || targetId === 'prompt-examples') {
+                
+                // Add click handler to navigate to the document
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Load the content
+                    loadContent(targetId);
+                    
+                    // Update URL without page reload
+                    window.history.pushState({}, '', `#${targetId}`);
+                    
+                    // Update active nav link
+                    const navLinks = document.querySelectorAll('.main-nav a, .dropdown-content a');
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    const matchingLink = document.querySelector(`.main-nav a[href="#${targetId}"]`) || 
+                                      document.querySelector(`.dropdown-content a[href="#${targetId}"]`);
+                    if (matchingLink) matchingLink.classList.add('active');
+                });
+            }
         }
     });
 }

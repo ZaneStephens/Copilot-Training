@@ -112,6 +112,8 @@ Creating a new agent in Microsoft Copilot Studio is a straightforward process wi
 
 Both approaches guide you through an intuitive setup process designed to minimize technical barriers while establishing the foundation for your conversational AI agent.
 
+> For a more comprehensive guide on creating and configuring agents in Copilot Studio, see [Creating Copilot Agents](#studio-agents).
+
 ### Navigating the Interface
 
 Understanding the Microsoft Copilot Studio interface is crucial for effective agent development. The interface consists of several key components:

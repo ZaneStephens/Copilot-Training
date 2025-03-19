@@ -116,3 +116,12 @@
     color: var(--primary-color, #0078d4);
     text-decoration: underline;
 }
+
+/* Hide heading anchor icons */
+.heading-anchor i.fas.fa-link {
+    display: none !important;
+}
+
+.heading-anchor {
+    display: none !important;
+}

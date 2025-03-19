@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('search');
     const searchButton = document.getElementById('search-btn');
     
+    // Initialize search cache
+    const searchCache = new Map();
+    
     if (searchInput && searchButton) {
         // Search on button click
         searchButton.addEventListener('click', function() {
@@ -15,13 +18,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 performSearch();
             }
         });
+        
+        // Live search suggestions (optional, triggered after 300ms of typing)
+        let typingTimer;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(typingTimer);
+            if (searchInput.value.trim()) {
+                typingTimer = setTimeout(() => {
+                    // Only show suggestions if the input has 3 or more characters
+                    if (searchInput.value.trim().length >= 3) {
+                        showSearchSuggestions(searchInput.value.trim());
+                    }
+                }, 300);
+            }
+        });
+    }
+    
+    // Function to show search suggestions
+    function showSearchSuggestions(query) {
+        // Implementation can be added later if needed
+        // This would show a dropdown with potential matches as the user types
     }
 });
 
 // Perform the search across all content
 async function performSearch() {
     const searchInput = document.getElementById('search');
-    const query = searchInput.value.trim().toLowerCase();
+    const rawQuery = searchInput.value.trim();
+    let query = rawQuery.toLowerCase();
     
     if (!query) return;
     
@@ -37,7 +61,7 @@ async function performSearch() {
     // Show loading state
     resultsElement.innerHTML = `
         <section class="hero">
-            <h2>Searching for "${query}"</h2>
+            <h2>Searching for "${rawQuery}"</h2>
             <p>Please wait while we search the documentation...</p>
         </section>
         <div class="loading">
@@ -50,32 +74,83 @@ async function performSearch() {
     resultsElement.classList.add('active');
     
     try {
+        // Check for special operators (like "/" command)
+        let specialSearch = false;
+        let searchType = '';
+        
+        if (query.startsWith('/')) {
+            specialSearch = true;
+            // Remove the slash and get the search type
+            query = query.substring(1);
+            
+            // Determine search type from remaining query
+            // This is a simple implementation - could be expanded based on requirements
+            if (query.includes('file:') || query.includes('document:')) {
+                searchType = 'file';
+                query = query.replace(/(file:|document:)/g, '').trim();
+            } else if (query.includes('person:')) {
+                searchType = 'person';
+                query = query.replace(/person:/g, '').trim();
+            } else {
+                // Default case - general keyword search with forward slash
+                specialSearch = false;
+                query = rawQuery.toLowerCase();
+            }
+        }
+        
         // Collect all content paths to search
         const allContentPaths = [
             ...Object.values(contentMap).filter(path => path !== 'custom-prompt-examples'),
             ...Object.values(promptExamplesMap)
         ];
         
-        // Perform search across all content
-        const results = await searchAcrossContent(query, allContentPaths);
+        // Check cache before performing search
+        const cacheKey = `${query}-${specialSearch ? searchType : 'general'}`;
+        let results;
+        
+        if (window.searchCache && window.searchCache.has(cacheKey)) {
+            results = window.searchCache.get(cacheKey);
+            console.log('Using cached search results');
+        } else {
+            // Perform search across all content
+            results = await searchAcrossContent(query, allContentPaths, specialSearch, searchType);
+            
+            // Cache the results (maintain a reasonable cache size)
+            if (!window.searchCache) window.searchCache = new Map();
+            if (window.searchCache.size > 50) {
+                // Remove oldest entry if cache gets too large
+                const firstKey = window.searchCache.keys().next().value;
+                window.searchCache.delete(firstKey);
+            }
+            window.searchCache.set(cacheKey, results);
+        }
         
         // Display results
-        displaySearchResults(results, query, resultsElement);
+        displaySearchResults(results, rawQuery, resultsElement);
     } catch (error) {
         resultsElement.innerHTML = `
             <div class="error-message">
                 <h2>Search Error</h2>
                 <p>${error.message}</p>
                 <p>Please try again with a different search term.</p>
+                <button id="search-retry" class="btn">Try Again</button>
             </div>
         `;
+        
+        // Add event listener to the retry button
+        const retryButton = document.getElementById('search-retry');
+        if (retryButton) {
+            retryButton.addEventListener('click', performSearch);
+        }
+        
         console.error('Search error:', error);
     }
 }
 
 // Search across all content files
-async function searchAcrossContent(query, contentPaths) {
+async function searchAcrossContent(query, contentPaths, isSpecialSearch = false, searchType = '') {
     const results = [];
+    const searchTerms = query.split(' ').filter(term => term.length > 1);
     
     // Process each content file
     for (const path of contentPaths) {
@@ -85,8 +160,8 @@ async function searchAcrossContent(query, contentPaths) {
             
             const content = await response.text();
             
-            // Find matches
-            const matches = findMatches(content, query);
+            // Find matches with improved matching algorithm
+            const matches = findMatches(content, query, searchTerms);
             
             if (matches.length > 0) {
                 // Get the title from the first H1 tag or use the filename
@@ -119,12 +194,25 @@ async function searchAcrossContent(query, contentPaths) {
                     }
                 }
                 
+                // Calculate relevance score
+                const relevanceScore = calculateRelevanceScore(matches, title, content, query);
+                
+                // For special searches, apply additional filtering
+                if (isSpecialSearch) {
+                    // Apply appropriate filters based on searchType
+                    if ((searchType === 'file' && !isRelevantFileType(contentId, path)) ||
+                        (searchType === 'person' && !contentContainsPerson(content, query))) {
+                        continue; // Skip this result as it doesn't match the special search criteria
+                    }
+                }
+                
                 results.push({
                     title,
                     path,
                     matches,
                     contentType,
-                    contentId
+                    contentId,
+                    relevanceScore
                 });
             }
         } catch (error) {
@@ -132,39 +220,111 @@ async function searchAcrossContent(query, contentPaths) {
         }
     }
     
-    return results;
+    // Sort results by relevance score (highest first)
+    return results.sort((a, b) => b.relevanceScore - a.relevanceScore);
 }
 
-// Find matches of the query in content
-function findMatches(content, query) {
+// Check if content contains references to a person
+function contentContainsPerson(content, personName) {
+    // This is a simple implementation - could be improved with more sophisticated matching
+    const lowerContent = content.toLowerCase();
+    const lowerName = personName.toLowerCase();
+    return lowerContent.includes(lowerName);
+}
+
+// Check if file is relevant to the file type search
+function isRelevantFileType(contentId, path) {
+    // Simple implementation - could be expanded
+    return true; // By default, include all files
+}
+
+// Calculate a relevance score for search results
+function calculateRelevanceScore(matches, title, content, query) {
+    let score = 0;
+    
+    // Base score is the number of matches
+    score += matches.length;
+    
+    // Title match is more important
+    if (title.toLowerCase().includes(query.toLowerCase())) {
+        score += 10;
+    }
+    
+    // H1, H2, H3 matches are more important
+    const headerMatches = content.match(new RegExp(`^#{1,3} .*${query}.*$`, 'gim'));
+    if (headerMatches) {
+        score += headerMatches.length * 5;
+    }
+    
+    // Exact phrase matches are more important than individual word matches
+    const exactMatches = content.match(new RegExp(query, 'gi'));
+    if (exactMatches) {
+        score += exactMatches.length * 3;
+    }
+    
+    return score;
+}
+
+// Find matches of the query in content with improved matching
+function findMatches(content, query, searchTerms) {
     const matches = [];
     const lines = content.split('\n');
     
     // Look for query in content
     lines.forEach((line, index) => {
         const lowerLine = line.toLowerCase();
+        
+        // Check for exact query match
         if (lowerLine.includes(query)) {
-            // Get context (lines around the match)
-            const start = Math.max(0, index - 1);
-            const end = Math.min(lines.length - 1, index + 1);
-            
-            // Extract the context
-            const context = lines.slice(start, end + 1).join('\n');
-            
-            // Highlight the match
-            const highlightedContext = context.replace(
-                new RegExp(query, 'gi'),
-                match => `<mark class="search-highlight">${match}</mark>`
-            );
-            
-            matches.push({
-                line: index + 1,
-                context: highlightedContext
-            });
+            addMatch(line, index, matches, lines, searchTerms);
+        } 
+        // Check for all search terms appearing in the line
+        else if (searchTerms.length > 1) {
+            const allTermsMatch = searchTerms.every(term => lowerLine.includes(term));
+            if (allTermsMatch) {
+                addMatch(line, index, matches, lines, searchTerms);
+            }
         }
     });
     
     return matches;
+}
+
+// Helper function to add a match to the matches array
+function addMatch(line, index, matches, lines, searchTerms) {
+    // Get context (lines around the match)
+    const start = Math.max(0, index - 1);
+    const end = Math.min(lines.length - 1, index + 1);
+    
+    // Extract the context
+    const context = lines.slice(start, end + 1).join('\n');
+    
+    // Highlight all search terms in the context
+    let highlightedContext = context;
+    
+    // First highlight the full query if it exists
+    if (searchTerms.length > 1) {
+        const fullQuery = searchTerms.join(' ');
+        highlightedContext = highlightedContext.replace(
+            new RegExp(fullQuery.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi'),
+            match => `<mark class="search-highlight">${match}</mark>`
+        );
+    }
+    
+    // Then highlight individual terms
+    searchTerms.forEach(term => {
+        if (term.length > 1) {
+            highlightedContext = highlightedContext.replace(
+                new RegExp(term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'gi'),
+                match => `<mark class="search-highlight">${match}</mark>`
+            );
+        }
+    });
+    
+    matches.push({
+        line: index + 1,
+        context: highlightedContext
+    });
 }
 
 // Display search results
@@ -177,6 +337,14 @@ function displaySearchResults(results, query, resultsElement) {
             </section>
             <div class="search-no-results">
                 <p>Try a different search term or browse the documentation using the navigation menu.</p>
+                <div class="search-tips">
+                    <h4>Search Tips:</h4>
+                    <ul>
+                        <li>Use specific keywords instead of general terms</li>
+                        <li>Try using "/" to search for specific content types</li>
+                        <li>Check for typos in your search terms</li>
+                    </ul>
+                </div>
             </div>
         `;
         return;
@@ -217,7 +385,24 @@ function displaySearchResults(results, query, resultsElement) {
         `;
     }
     
+    resultsHTML += `
+        <section class="search-footer">
+            <p>Not finding what you need? Try <a href="#" id="refine-search">refining your search</a> or <a href="#home">browsing all documentation</a>.</p>
+        </section>
+    `;
+    
     resultsElement.innerHTML = resultsHTML;
+    
+    // Add click handler for the "refine search" link
+    const refineSearchLink = document.getElementById('refine-search');
+    if (refineSearchLink) {
+        refineSearchLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const searchInput = document.getElementById('search');
+            searchInput.focus();
+            searchInput.select();
+        });
+    }
     
     // Add click handlers for the result cards
     const resultLinks = resultsElement.querySelectorAll('.search-result-card');
@@ -259,8 +444,17 @@ function displaySearchResults(results, query, resultsElement) {
                 const matchingLink = document.querySelector(`.main-nav a[href="#prompt-examples"]`);
                 if (matchingLink) matchingLink.classList.add('active');
             }
+            
+            // Log search analytics (could be implemented if needed)
+            logSearchClick(targetType, targetId, query);
         });
     });
+}
+
+// Optional: Log search analytics
+function logSearchClick(contentType, contentId, searchQuery) {
+    // This would implement analytics tracking if needed
+    console.log(`Search click: ${contentType}/${contentId} from query "${searchQuery}"`);
 }
 
 // Create a result card HTML
@@ -288,9 +482,15 @@ function createResultCard(result, query) {
         };
         icon = guideIcons[result.contentId] || icon;
     } else {
-        // Use the same icon map as in the prompt examples
-        icon = getIconForPrompt(result.contentId);
+        // Use the getIconForPrompt function
+        const iconDetails = getIconForPrompt(result.contentId);
+        icon = iconDetails.icon;
     }
+    
+    // Create relevance indicator based on score (optional feature)
+    const relevanceHTML = result.relevanceScore > 10 ? 
+        '<span class="relevance-indicator high">High match</span>' : 
+        (result.relevanceScore > 5 ? '<span class="relevance-indicator medium">Medium match</span>' : '');
     
     return `
         <div class="search-result-card" data-type="${result.contentType}" data-id="${result.contentId}">
@@ -298,7 +498,7 @@ function createResultCard(result, query) {
                 <i class="${icon}"></i>
             </div>
             <div class="search-result-content">
-                <h4>${result.title}</h4>
+                <h4>${result.title} ${relevanceHTML}</h4>
                 <div class="search-result-context">
                     ${firstMatch.context}
                 </div>
