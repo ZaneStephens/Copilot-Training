@@ -1,0 +1,383 @@
+/* Main CSS file that imports all modules */
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;500;600;700&display=swap');
+@import 'variables.css';
+@import 'reset.css';
+@import 'typography.css';
+@import 'layout.css';
+@import 'header.css';
+@import 'footer.css';
+@import 'buttons.css';
+@import 'cards.css';
+@import 'topics.css';
+@import 'tables.css';
+@import 'utilities.css';
+@import 'responsive.css';
+
+/* Table of Contents styling */
+.table-of-contents {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin: 20px 0 30px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.dark-mode .table-of-contents {
+    background-color: #2d2d2d;
+    border-color: #3d3d3d;
+}
+
+/* Collapsible TOC styles */
+.table-of-contents.collapsible {
+    padding: 0;
+}
+
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e9ecef;
+    cursor: pointer;
+}
+
+.dark-mode .toc-header {
+    border-color: #3d3d3d;
+}
+
+.toc-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.toc-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color, #333);
+    cursor: pointer;
+    padding: 4px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.toc-toggle:hover {
+    color: var(--primary-color, #0078d4);
+}
+
+.toc-content {
+    padding: 16px 24px;
+    max-height: 500px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.toc-content.collapsed {
+    max-height: 0;
+    padding: 0 24px;
+    overflow: hidden;
+}
+
+.toc-content ul {
+    margin: 0;
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.toc-content li {
+    padding: 4px 0; /* Reduced from 3px to 1px */
+    margin: 0px; /* Ensure no margins */
+    line-height: 1.3; /* Tighter line height */
+}
+
+.toc-content li a {
+    display: block;
+    padding: 2px 0;
+}
+
+/* Reduce spacing for nested lists */
+.toc-content ul ul {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 15px;
+}
+
+.table-of-contents a {
+    color: var(--text-color, #333);
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+}
+
+.table-of-contents a:hover {
+    color: var(--primary-color, #0078d4);
+    text-decoration: underline;
+}
+
+/* Hide heading anchor icons */
+.heading-anchor i.fas.fa-link {
+    display: none !important;
+}
+
+.heading-anchor {
+    display: none !important;
+}
+
+/* ========== Sticky sidebar TOC ========== */
+
+.doc-with-sidebar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    gap: var(--space-xl, 2rem);
+    align-items: start;
+}
+
+.doc-main {
+    min-width: 0;
+}
+
+.doc-sidebar {
+    position: sticky;
+    top: calc(var(--header-height, 70px) + 1rem);
+    max-height: calc(100vh - var(--header-height, 70px) - 2rem);
+    overflow-y: auto;
+    padding: 0.75rem 0.5rem 0.75rem 1rem;
+    border-left: 1px solid var(--border-color, #e1dfdd);
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.doc-sidebar h4 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary, #605e5c);
+    margin: 0 0 0.5rem 0;
+    padding: 0;
+}
+
+.doc-sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.doc-sidebar li {
+    margin: 0;
+    padding: 0;
+}
+
+.doc-sidebar a {
+    display: block;
+    padding: 4px 8px;
+    color: var(--text-secondary, #605e5c);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    margin-left: -10px;
+    border-radius: 0 4px 4px 0;
+    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.doc-sidebar a:hover {
+    color: var(--ms-purple, #5c2d91);
+    background-color: rgba(92, 45, 145, 0.06);
+}
+
+.doc-sidebar a.toc-h3 {
+    padding-left: 22px;
+    font-size: 0.82rem;
+}
+
+.doc-sidebar a.active {
+    color: var(--ms-purple, #5c2d91);
+    border-left-color: var(--ms-purple, #5c2d91);
+    font-weight: 600;
+    background-color: rgba(92, 45, 145, 0.06);
+}
+
+.dark-mode .doc-sidebar {
+    border-left-color: var(--border-color, #444);
+}
+
+.dark-mode .doc-sidebar a:hover,
+.dark-mode .doc-sidebar a.active {
+    background-color: rgba(123, 75, 180, 0.18);
+}
+
+/* Hide the inline markdown TOC once the sidebar is rendered */
+.module-content.has-sidebar-toc .table-of-contents,
+.module-content.has-sidebar-toc h2#table-of-contents,
+.module-content.has-sidebar-toc h2#contents {
+    display: none !important;
+}
+
+/* Stack on narrow screens */
+@media (max-width: 960px) {
+    .doc-with-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .doc-sidebar {
+        position: static;
+        max-height: none;
+        border-left: none;
+        border-bottom: 1px solid var(--border-color, #e1dfdd);
+        padding: 0.5rem 0 1rem 0;
+        margin-bottom: 1.25rem;
+        order: -1;
+    }
+
+    .doc-sidebar a.toc-h3 {
+        padding-left: 24px;
+    }
+}
+
+/* ========== Search enhancements ========== */
+
+.search-container {
+    position: relative;
+}
+
+.search-suggestions {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background: var(--bg-white, #fff);
+    border: 1px solid var(--border-color, #e1dfdd);
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    max-height: 360px;
+    overflow-y: auto;
+    z-index: 1200;
+    display: none;
+}
+
+.search-suggestions.open {
+    display: block;
+}
+
+.search-suggestion {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-color, #e1dfdd);
+    color: var(--text-primary, #323130);
+}
+
+.search-suggestion:last-child {
+    border-bottom: none;
+}
+
+.search-suggestion:hover,
+.search-suggestion.focused {
+    background-color: rgba(92, 45, 145, 0.08);
+}
+
+.search-suggestion-icon {
+    color: var(--ms-purple, #5c2d91);
+    flex: 0 0 auto;
+    margin-top: 2px;
+}
+
+.search-suggestion-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.search-suggestion-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
+.search-suggestion-snippet {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #605e5c);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.search-suggestion-snippet mark {
+    background: rgba(255, 215, 0, 0.5);
+    color: inherit;
+    padding: 0 1px;
+    border-radius: 2px;
+}
+
+.search-suggestions-empty {
+    padding: 12px;
+    color: var(--text-secondary, #605e5c);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.search-suggestions-footer {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+    color: var(--text-secondary, #605e5c);
+    background-color: rgba(92, 45, 145, 0.04);
+    border-top: 1px solid var(--border-color, #e1dfdd);
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-shortcut-hint {
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+
+.dark-mode .search-suggestions {
+    background: var(--bg-white, #2d2d2d);
+    border-color: var(--border-color, #444);
+}
+
+.dark-mode .search-suggestion:hover,
+.dark-mode .search-suggestion.focused {
+    background-color: rgba(123, 75, 180, 0.2);
+}
+
+.dark-mode .search-shortcut-hint {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* In-page search highlight when navigating from a result */
+mark.in-page-hit {
+    background: #ffd54f;
+    color: inherit;
+    padding: 1px 2px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px rgba(255, 213, 79, 0.5);
+}
+
+.dark-mode mark.in-page-hit {
+    background: #f9a825;
+    box-shadow: 0 0 0 2px rgba(249, 168, 37, 0.4);
+}
+
+/* Search "in this document" toggle */
+.search-scope-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+    font-size: 0.8rem;
+    color: var(--text-secondary, #605e5c);
+    user-select: none;
+    cursor: pointer;
+}
+
+.search-scope-toggle input {
+    margin: 0;
+    cursor: pointer;
+}

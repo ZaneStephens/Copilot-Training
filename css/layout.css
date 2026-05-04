@@ -1,0 +1,93 @@
+/* Layout CSS */
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+main {
+    min-height: calc(100vh - var(--header-height) - 200px); /* Adjusts for header and footer */
+    padding: var(--space-xl) 0;
+}
+
+.module-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.module-content.active {
+    display: block;
+}
+
+.section {
+    margin-bottom: var(--space-xxl);
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 calc(-1 * var(--space-md));
+}
+
+.col {
+    flex: 1;
+    padding: 0 var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-lg);
+    margin-bottom: 20px;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    position: fixed;
+    height: calc(100vh - var(--header-height));
+    top: var(--header-height);
+    left: 0;
+    overflow-y: auto;
+    background-color: var(--bg-white);
+    border-right: 1px solid var(--border-color);
+    padding: var(--space-lg);
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform var(--transition-normal);
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+.content-with-sidebar {
+    margin-left: var(--sidebar-width);
+}
+
+.hero {
+    background: linear-gradient(to right, var(--copilot-gradient-start), var(--copilot-gradient-end));
+    color: var(--text-light);
+    padding: var(--space-xxl) 0;
+    text-align: center;
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.hero h2 {
+    font-size: var(--font-size-huge);
+    margin-bottom: var(--space-lg);
+}
+
+.hero p {
+    font-size: var(--font-size-lg);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
